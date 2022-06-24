@@ -111,7 +111,7 @@ type Config struct {
 }
 
 // NewEmulatorServer creates a new instance of a Flow Emulator server.
-func NewEmulatorServer(logger *logrus.Logger, conf *Config) *EmulatorServer {
+func NewEmulatorServer(logger *logrus.Logger, conf *Config, group *graceland.Group) *EmulatorServer {
 	conf = sanitizeConfig(conf)
 
 	store, err := configureStorage(logger, conf)
@@ -171,6 +171,7 @@ func NewEmulatorServer(logger *logrus.Logger, conf *Config) *EmulatorServer {
 		rest:       restServer,
 		admin:      nil,
 		blockchain: blockchain,
+		group:      group,
 	}
 
 	server.admin = NewAdminServer(server, be, &store, grpcServer, livenessTicker, conf.AdminPort, conf.HTTPHeaders)
@@ -185,9 +186,6 @@ func NewEmulatorServer(logger *logrus.Logger, conf *Config) *EmulatorServer {
 
 // Start starts the Flow Emulator server.
 func (s *EmulatorServer) Start() {
-	s.Stop()
-
-	s.group = graceland.NewGroup()
 	// only start blocks ticker if it exists
 	if s.blocks != nil {
 		s.group.Add(s.blocks)
@@ -217,12 +215,12 @@ func (s *EmulatorServer) Start() {
 	// routines are shut down in insertion order, so database is added last
 	s.group.Add(s.storage)
 
-	err := s.group.Start()
-	if err != nil {
-		s.logger.WithError(err).Error("❗  Server error")
-	}
+	// err := s.group.Start()
+	// if err != nil {
+	// 	s.logger.WithError(err).Error("❗  Server error")
+	// }
 
-	s.Stop()
+	// s.Stop()
 }
 
 func (s *EmulatorServer) Stop() {
