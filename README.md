@@ -14,7 +14,15 @@ The playground and CLI are still undergoing heavy development, the CLI is writte
 
 ## How to use the EmeraldCity-CLI
 
-Current Commands
+Current Commands **propose we create the shortname "ecd" to invoke the CLI **
 
-1. ecd emulator
-    * Stars the Flow Emulator and WebSocket server to await connections from the Emerald City Playground.
+1. ```EmeraldCity-CLI emulator```
+    * Starts a WebSocket server to await connections from the Emerald City Playground and upon connection start the Flow Emulator and Dev Wallet. The defualt confiugration starts the Flow Emulator with the ```--contracts``` flag set to automatically deploy all base contracts.
+        * Flags - all flags for the Flow Emulator are supported with the following exceptions/addtions:
+            1. The ```--contracts``` flag has been renamed to ```--no-contracts``` and will start the emulator without the NonFungibleToken, MetadataViews, ExampleNFT, or NFTStorefront contracts.
+            2. ```--no-ws-server``` will start the Flow Emulator without creating a WebSocket server to wait for the Emerald City Playground to connect.
+            3. ```--no-dev-wallet``` will start the Flow Emulator without start the Flow Dev Wallet
+                * Currently none of the dev-wallet flags are supported but we are working on adding them
+2. ```EmeraldCity-CLI create-fcl-app <nextjs/svelte>``` **COMING SOON - IN DEVELOPMENT**
+    * Deploys FCL Quick Start project code sets chossing either the fcl-nextjs-quickstart or the fcl-svelte-quickstart project templates
+        1. ```--name <name>```
