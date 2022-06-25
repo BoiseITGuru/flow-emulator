@@ -24,7 +24,7 @@ import (
 	"github.com/onflow/flow-go/access"
 	flowgo "github.com/onflow/flow-go/model/flow"
 
-	convert "github.com/onflow/flow-emulator/convert/sdk"
+	convert "github.com/boiseitguru/flow-emulator/convert/sdk"
 )
 
 var _ access.API = &Adapter{}

@@ -12,7 +12,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	emulator "github.com/onflow/flow-emulator"
+	emulator "github.com/boiseitguru/flow-emulator"
 )
 
 func TestExecuteScript(t *testing.T) {

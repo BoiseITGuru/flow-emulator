@@ -32,8 +32,8 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	emulator "github.com/onflow/flow-emulator"
-	"github.com/onflow/flow-emulator/utils/unittest"
+	emulator "github.com/boiseitguru/flow-emulator"
+	"github.com/boiseitguru/flow-emulator/utils/unittest"
 )
 
 const testContract = "pub contract Test {}"

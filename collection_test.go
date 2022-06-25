@@ -8,8 +8,8 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	emulator "github.com/onflow/flow-emulator"
-	convert "github.com/onflow/flow-emulator/convert/sdk"
+	emulator "github.com/boiseitguru/flow-emulator"
+	convert "github.com/boiseitguru/flow-emulator/convert/sdk"
 )
 
 func TestCollections(t *testing.T) {

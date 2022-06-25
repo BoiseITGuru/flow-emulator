@@ -27,7 +27,7 @@ import (
 	"github.com/onflow/flow-go-sdk/test"
 	"github.com/stretchr/testify/assert"
 
-	"github.com/onflow/flow-emulator/types"
+	"github.com/boiseitguru/flow-emulator/types"
 )
 
 func TestResult(t *testing.T) {

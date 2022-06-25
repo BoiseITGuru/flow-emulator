@@ -25,8 +25,8 @@ import (
 	"github.com/onflow/flow-go/fvm"
 	"github.com/stretchr/testify/assert"
 
-	"github.com/onflow/flow-emulator/convert"
-	sdkConvert "github.com/onflow/flow-emulator/convert/sdk"
+	"github.com/boiseitguru/flow-emulator/convert"
+	sdkConvert "github.com/boiseitguru/flow-emulator/convert/sdk"
 	flowgo "github.com/onflow/flow-go/model/flow"
 )
 
