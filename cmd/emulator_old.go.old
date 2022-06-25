@@ -159,12 +159,13 @@ func wsEndpoint(w http.ResponseWriter, r *http.Request) {
 
 	formattedResponse := jsonResponse{
 		ResponseType: "emulator-status",
-		Data: logStructure{
+		Data: "logStructure{
 			Time:  "",
 			Level: "",
 			Msg:   "started",
-		},
+		},"
 	}
+
 
 	if err = ws.WriteJSON(formattedResponse); err != nil {
 		log.Println(err)

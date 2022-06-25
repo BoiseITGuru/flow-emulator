@@ -19,6 +19,7 @@
 package cmdcli
 
 import (
+	_ "embed"
 	"encoding/hex"
 	"fmt"
 	"log"
@@ -28,6 +29,7 @@ import (
 
 	"EmeraldCity-CLI/server"
 
+	wallet "github.com/boiseitguru/fcl-dev-wallet"
 	"github.com/onflow/cadence"
 	emulator "github.com/onflow/flow-emulator"
 	sdk "github.com/onflow/flow-go-sdk"
@@ -39,6 +41,9 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/yaacov/observer/observer"
 )
+
+//go:embed embed_files/flow.json
+var flowConfig []byte
 
 type Config struct {
 	Port                   int           `default:"3569" flag:"port,p" info:"port to run RPC server"`
@@ -66,11 +71,14 @@ type Config struct {
 	TransactionMaxGasLimit int           `default:"9999" flag:"transaction-max-gas-limit" info:"maximum gas limit for transactions"`
 	ScriptGasLimit         int           `default:"100000" flag:"script-gas-limit" info:"gas limit for scripts"`
 	WithOutContracts       bool          `default:"false" flag:"no-contracts" info:"don't deploy common contracts when emulator starts"`
+	NoWsServer             bool          `default:"false" flag:"no-ws-server" info:"don't deploy with websocket server"`
 }
 
 var (
 	conf Config
 )
+
+var tempFlowConfig string
 
 // var emu *server.EmulatorServer
 
@@ -104,17 +112,21 @@ var cmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		// fmt.Println("Now listening for connections to Emerald City Playground on http://localhost:5050")
 		// log.Fatal(http.ListenAndServe(":5050", nil))
-
 		emulatorGroup = graceland.NewGroup()
-		wsGroup = graceland.NewGroup()
-		wsServer := server.NewWsServer(o, logger)
-		wsGroup.Add(wsServer)
 
-		// start group and block until shutdown
-		err := wsGroup.Start()
-		if err != nil {
-			fmt.Printf("Shut down with error: %s\n", err.Error())
-			return
+		if !conf.NoWsServer {
+			wsGroup = graceland.NewGroup()
+			wsServer := server.NewWsServer(o, logger)
+			wsGroup.Add(wsServer)
+
+			// start group and block until shutdown
+			err := wsGroup.Start()
+			if err != nil {
+				fmt.Printf("Shut down with error: %s\n", err.Error())
+				return
+			}
+		} else {
+			startEmulatorGroup()
 		}
 
 		fmt.Print("Shut down with no error\n")
@@ -220,7 +232,6 @@ func startEmulator(getServiceKey serviceKeyFunc) {
 	emu := server.NewEmulatorServer(logger, serverConf, emulatorGroup)
 
 	emu.Start()
-	emulatorGroup.Start()
 }
 
 func initLogger() *logrus.Logger {
@@ -286,17 +297,62 @@ func defaultServiceKey(
 	return serviceKey.PrivateKey, serviceKey.SigAlgo, serviceKey.HashAlgo
 }
 
+func checkFlowConfig() {
+	if _, e := os.Stat("flow.json"); os.IsNotExist(e) {
+		tempConfig, err := os.CreateTemp("", "flow-*.json")
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		if _, err := tempConfig.Write(flowConfig); err != nil {
+			log.Fatal(err)
+		}
+
+		tempConfig.Close()
+
+		tempFlowConfig = tempConfig.Name()
+	}
+}
+
+func startEmulatorGroup() {
+	logger.Info("IDE Connected")
+
+	startEmulator(defaultServiceKey)
+
+	srv, err := wallet.NewHTTPServer(8701, &wallet.Config{
+		Address:    "0xf8d6e0586b0a20c7",
+		PrivateKey: "68ee617d9bf67a4677af80aaca5a090fcda80ff2f4dbc340e0e36201fa1f1d8c",
+		PublicKey:  "9cd98d436d111aab0718ab008a466d636a22ac3679d335b77e33ef7c52d9c8ce47cf5ad71ba38cedd336402aa62d5986dc224311383383c09125ec0636c0b042",
+		AccessNode: "http://localhost:8080",
+	}, logger)
+	if err != nil {
+		panic(err)
+	}
+
+	emulatorGroup.Add(srv)
+
+	o.Emit("emulator-group-started")
+
+	emulatorGroup.Start()
+}
+
 func eventschan(e interface{}) {
 	switch e.(string) {
 	case "ide-connected":
-		logger.Info("IDE Connected")
-		// logStream := bufio.NewWriter(logger.Writer())
-
-		startEmulator(defaultServiceKey)
+		startEmulatorGroup()
 	case "ide-disconnected":
 		logger.Info("IDE Disconnected - Stopping Emulator")
 		emulatorGroup.Stop()
+	case "emulator-group-started":
+		// var overflowConfig *overflow.OverflowBuilder
 
+		// if tempFlowConfig != "" {
+		// 	overflowConfig = overflow.NewOverflowEmulator().Config(tempFlowConfig)
+		// } else {
+		// 	overflowConfig = overflow.NewOverflowEmulator()
+		// }
+
+		// overflowConfig.Start()
 	}
 }
 
@@ -307,6 +363,8 @@ func init() {
 	o.Open()
 
 	o.AddListener(eventschan)
+
+	checkFlowConfig()
 
 	err := sconfig.New(&conf).
 		FromEnvironment(EnvPrefix).

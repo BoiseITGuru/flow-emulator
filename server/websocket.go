@@ -18,6 +18,11 @@ type WsServer struct {
 	logger     *logrus.Logger
 }
 
+type jsonResponse struct {
+	ResponseType string `json:"responseType"`
+	Data         string `json:"data"`
+}
+
 var o *observer.Observer
 
 func NewWsServer(eventsChan *observer.Observer, logger *logrus.Logger) *WsServer {
@@ -56,6 +61,20 @@ func wsEndpoint(w http.ResponseWriter, r *http.Request) {
 	}
 
 	o.Emit("ide-connected")
+
+	o.AddListener(func(e interface{}) {
+		switch e.(string) {
+		case "emulator-group-started":
+			formattedResponse := jsonResponse{
+				ResponseType: "emulator-status",
+				Data:         "started",
+			}
+
+			if err = ws.WriteJSON(formattedResponse); err != nil {
+				log.Println(err)
+			}
+		}
+	})
 
 	// listen indefinitely for new messages coming
 	// through on our WebSocket connection
