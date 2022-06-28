@@ -25,9 +25,9 @@ import (
 	"github.com/psiemens/graceland"
 	"github.com/sirupsen/logrus"
 
-	"github.com/boiseitguru/flow-emulator/storage"
-	"github.com/boiseitguru/flow-emulator/storage/badger"
-	"github.com/boiseitguru/flow-emulator/storage/memstore"
+	"github.com/onflow/flow-emulator/storage"
+	"github.com/onflow/flow-emulator/storage/badger"
+	"github.com/onflow/flow-emulator/storage/memstore"
 )
 
 type Storage interface {

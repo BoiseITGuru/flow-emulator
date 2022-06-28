@@ -26,7 +26,7 @@ import (
 	"github.com/onflow/flow-go/fvm"
 	flowgo "github.com/onflow/flow-go/model/flow"
 
-	"github.com/boiseitguru/flow-emulator/storage"
+	"github.com/onflow/flow-emulator/storage"
 )
 
 var _ fvm.Blocks = &blocks{}

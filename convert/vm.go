@@ -22,8 +22,8 @@ import (
 	"github.com/onflow/flow-go/fvm"
 	fvmerrors "github.com/onflow/flow-go/fvm/errors"
 
-	sdkConvert "github.com/boiseitguru/flow-emulator/convert/sdk"
-	"github.com/boiseitguru/flow-emulator/types"
+	sdkConvert "github.com/onflow/flow-emulator/convert/sdk"
+	"github.com/onflow/flow-emulator/types"
 )
 
 func VMTransactionResultToEmulator(tp *fvm.TransactionProcedure) (*types.TransactionResult, error) {

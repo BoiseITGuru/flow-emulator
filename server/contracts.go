@@ -13,7 +13,7 @@ import (
 	"github.com/onflow/flow-nft/lib/go/contracts"
 	fusd "github.com/onflow/fusd/lib/go/contracts"
 
-	emulator "github.com/boiseitguru/flow-emulator"
+	emulator "github.com/onflow/flow-emulator"
 )
 
 var (

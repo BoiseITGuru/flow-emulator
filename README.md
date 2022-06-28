@@ -10,9 +10,9 @@
     <a href="https://docs.onflow.org/emulator/"><strong>Read the docs»</strong></a>
     <br />
     <br />
-    <a href="https://github.com/boiseitguru/flow-emulator/issues">Report Bug</a>
+    <a href="https://github.com/onflow/flow-emulator/issues">Report Bug</a>
     ·
-    <a href="https://github.com/boiseitguru/flow-emulator/blob/master/CONTRIBUTING.md">Contribute</a>
+    <a href="https://github.com/onflow/flow-emulator/blob/master/CONTRIBUTING.md">Contribute</a>
   </p>
 </p>
 <br />
@@ -95,7 +95,7 @@ Read more about the project and configuration [here](https://docs.onflow.org/flo
 ## Using Emulator in Go
 You can use the emulator as a module in your Go project. To install emulator, use go get:
 ```
-go get github.com/boiseitguru/flow-emulator
+go get github.com/onflow/flow-emulator
 ```
 
 After installing the emulator module you can initialize it in the code:

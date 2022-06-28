@@ -1,4 +1,4 @@
-module github.com/boiseitguru/flow-emulator
+module github.com/onflow/flow-emulator
 
 go 1.18
 

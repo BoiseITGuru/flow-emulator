@@ -21,7 +21,7 @@ package convert
 import (
 	"github.com/onflow/flow-go/fvm"
 
-	"github.com/boiseitguru/flow-emulator/types"
+	"github.com/onflow/flow-emulator/types"
 )
 
 func ToStorableResult(tp *fvm.TransactionProcedure) (types.StorableTransactionResult, error) {

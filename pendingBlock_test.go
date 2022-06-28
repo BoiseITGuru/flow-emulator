@@ -8,7 +8,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	emulator "github.com/boiseitguru/flow-emulator"
+	emulator "github.com/onflow/flow-emulator"
 )
 
 func setupPendingBlockTests(t *testing.T) (

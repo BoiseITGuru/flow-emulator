@@ -13,7 +13,7 @@ import (
 	"github.com/onflow/cadence"
 	"github.com/onflow/flow-go-sdk"
 
-	emulator "github.com/boiseitguru/flow-emulator"
+	emulator "github.com/onflow/flow-emulator"
 )
 
 func TestEventEmitted(t *testing.T) {

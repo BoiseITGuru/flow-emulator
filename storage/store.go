@@ -24,7 +24,7 @@ import (
 	"github.com/onflow/flow-go/engine/execution/state/delta"
 	flowgo "github.com/onflow/flow-go/model/flow"
 
-	"github.com/boiseitguru/flow-emulator/types"
+	"github.com/onflow/flow-emulator/types"
 )
 
 // Store defines the storage layer for persistent chain state.

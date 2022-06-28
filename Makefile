@@ -47,8 +47,8 @@ generate: generate-mocks
 
 .PHONY: generate-mocks
 generate-mocks:
-	GO111MODULE=on ${GOPATH}/bin/mockgen -destination=server/backend/mocks/emulator.go -package=mocks github.com/boiseitguru/flow-emulator/server/backend Emulator
-	GO111MODULE=on ${GOPATH}/bin/mockgen -destination=storage/mocks/store.go -package=mocks github.com/boiseitguru/flow-emulator/storage Store
+	GO111MODULE=on ${GOPATH}/bin/mockgen -destination=server/backend/mocks/emulator.go -package=mocks github.com/onflow/flow-emulator/server/backend Emulator
+	GO111MODULE=on ${GOPATH}/bin/mockgen -destination=storage/mocks/store.go -package=mocks github.com/onflow/flow-emulator/storage Store
 
 .PHONY: ci
 ci: install-tools test check-tidy test coverage check-headers

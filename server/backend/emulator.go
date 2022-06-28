@@ -22,7 +22,7 @@ import (
 	sdk "github.com/onflow/flow-go-sdk"
 	flowgo "github.com/onflow/flow-go/model/flow"
 
-	"github.com/boiseitguru/flow-emulator/types"
+	"github.com/onflow/flow-emulator/types"
 )
 
 // Emulator defines the method set of an emulated blockchain.

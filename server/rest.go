@@ -25,7 +25,7 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/boiseitguru/flow-emulator/server/backend"
+	"github.com/onflow/flow-emulator/server/backend"
 	"github.com/onflow/flow-go/engine/access/rest"
 	"github.com/onflow/flow-go/model/flow"
 	"github.com/rs/zerolog"

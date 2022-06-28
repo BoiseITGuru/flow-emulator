@@ -22,7 +22,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/boiseitguru/flow-emulator/server/liveness"
+	"github.com/onflow/flow-emulator/server/liveness"
 )
 
 type LivenessTicker struct {

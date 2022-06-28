@@ -10,7 +10,7 @@ import (
 	"strings"
 	"testing"
 
-	convert "github.com/boiseitguru/flow-emulator/convert/sdk"
+	convert "github.com/onflow/flow-emulator/convert/sdk"
 	"github.com/rs/zerolog"
 
 	"github.com/onflow/cadence"
@@ -25,9 +25,9 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	emulator "github.com/boiseitguru/flow-emulator"
-	"github.com/boiseitguru/flow-emulator/types"
-	"github.com/boiseitguru/flow-emulator/utils/unittest"
+	emulator "github.com/onflow/flow-emulator"
+	"github.com/onflow/flow-emulator/types"
+	"github.com/onflow/flow-emulator/utils/unittest"
 )
 
 func TestSubmitTransaction(t *testing.T) {

@@ -35,11 +35,11 @@ import (
 	flowgo "github.com/onflow/flow-go/model/flow"
 	"github.com/rs/zerolog"
 
-	"github.com/boiseitguru/flow-emulator/convert"
-	sdkconvert "github.com/boiseitguru/flow-emulator/convert/sdk"
-	"github.com/boiseitguru/flow-emulator/storage"
-	"github.com/boiseitguru/flow-emulator/storage/memstore"
-	"github.com/boiseitguru/flow-emulator/types"
+	"github.com/onflow/flow-emulator/convert"
+	sdkconvert "github.com/onflow/flow-emulator/convert/sdk"
+	"github.com/onflow/flow-emulator/storage"
+	"github.com/onflow/flow-emulator/storage/memstore"
+	"github.com/onflow/flow-emulator/types"
 )
 
 // Blockchain emulates the functionality of the Flow blockchain.

@@ -26,9 +26,9 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	convert "github.com/boiseitguru/flow-emulator/convert/sdk"
-	"github.com/boiseitguru/flow-emulator/types"
-	"github.com/boiseitguru/flow-emulator/utils/unittest"
+	convert "github.com/onflow/flow-emulator/convert/sdk"
+	"github.com/onflow/flow-emulator/types"
+	"github.com/onflow/flow-emulator/utils/unittest"
 )
 
 func TestEncodeTransaction(t *testing.T) {

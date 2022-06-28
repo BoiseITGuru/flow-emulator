@@ -21,8 +21,8 @@ package main
 import (
 	"github.com/onflow/flow-go-sdk/crypto"
 
-	emulator "github.com/boiseitguru/flow-emulator"
-	"github.com/boiseitguru/flow-emulator/cmd/emulator/start"
+	emulator "github.com/onflow/flow-emulator"
+	"github.com/onflow/flow-emulator/cmd/emulator/start"
 )
 
 func defaultServiceKey(
